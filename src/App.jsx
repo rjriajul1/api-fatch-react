@@ -1,9 +1,22 @@
+import { Suspense } from "react";
 import "./App.css";
 import Baller from "./components/ballers";
 import BatsMan from "./components/batsman";
 import Counter from "./components/counter";
+import Users from "./components/users";
+import Posts from "./components/posts";
+
+// ! data fetching 
+const fatchUsers = fetch("https://jsonplaceholder.typicode.com/users")
+.then(res=>res.json());
+
+const posts =async ()=>{
+const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+return res.json();
+}
 
 function App() {
+  const friendPosts = posts();
   const btnStyle = {
     color: "white",
   };
@@ -23,9 +36,17 @@ function App() {
   return (
     <>
       <h1>Vite + React</h1>
+
+      <Suspense fallback={<p>wait for new post.....</p>}>
+      <Posts posts={friendPosts}></Posts>
+      </Suspense>
+
+      <Suspense fallback={<p>wait come user.....</p>}>
+      <Users fetchUsers={fatchUsers}></Users>
+      </Suspense>
+
       <Baller name={"Sakib"}></Baller>
       <BatsMan></BatsMan>
-
       <Counter></Counter>
 
       <button onClick={btnHandler} style={btnStyle}>

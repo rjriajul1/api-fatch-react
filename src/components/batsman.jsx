@@ -4,7 +4,7 @@ export default function BatsMan() {
   const batsManStyle = {
     color: "white",
   };
-  
+
   const [runs, setRuns] = useState(0);
   const [sixes, setSixes]=useState(0);
   const[fours, setFours]=useState(0)
@@ -33,7 +33,10 @@ export default function BatsMan() {
       <h2>six couter :  {sixes}</h2>
       <h2>four counter : {fours}</h2>
 
-      {runs >= 50 && "congradtions your score 50"}
+      {
+      runs >= 50 && "congradtions your score 50"
+      }
+      
 
       <h1>Scroe: {runs} </h1>
       <button style={batsManStyle} onClick={single}>
